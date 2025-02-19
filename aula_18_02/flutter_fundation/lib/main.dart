@@ -22,14 +22,16 @@ class MainApp extends StatelessWidget {
 
     List<Widget> textList = [];
 
+    int counter = 7;
+
     data.split('').forEach((char) {
-      final Random random = Random();
       textList.add(
         Text(
           char,
-          style: TextStyle(color: colors[random.nextInt(colors.length)]),
+          style: TextStyle(color: colors[(counter % 7)]),
         ),
       );
+      counter++;
     });
 
     return textList;
@@ -37,16 +39,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('executou o método build');
+    debugPrint('executou o método build');
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.indigoAccent,
         ),
         body: Container(
-          color: Colors.blueGrey,
+          color: Colors.black87,
           child: Center(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: rainbowTexts('Hello World!'),
             ),
           ),
