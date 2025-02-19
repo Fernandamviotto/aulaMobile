@@ -3,11 +3,18 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MainApp extends StatefulWidget {
+  MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  int counter = 7;
 
   List<Widget> rainbowTexts(String data) {
     final List<Color> colors = [
@@ -21,8 +28,6 @@ class MainApp extends StatelessWidget {
     ];
 
     List<Widget> textList = [];
-
-    int counter = 7;
 
     data.split('').forEach((char) {
       textList.add(
@@ -47,11 +52,30 @@ class MainApp extends StatelessWidget {
         ),
         body: Container(
           color: Colors.black87,
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: rainbowTexts('Hello World!'),
-            ),
+          child: Column(
+            spacing: 16,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: rainbowTexts('Hello World!'),
+              ),
+              TextButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStatePropertyAll(Colors.indigoAccent)),
+                onPressed: () {
+                  setState(() {
+                    final random = Random();
+                    counter = random.nextInt(999999);
+                  });
+                },
+                child: Text(
+                  'Clique em mim',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
           ),
         ),
       ),
